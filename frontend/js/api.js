@@ -2,7 +2,7 @@
  * RefBuddy API Client
  * Change API_BASE to your deployed Google Apps Script Web App URL
  */
-const API_BASE = "https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec";
+const API_BASE = "https://script.google.com/macros/s/AKfycbzKBPbd94DfTaIwWneMBqFZ1Oqm-UJkMHpe-fk2ldyHm8_1Q5x7b3U4IMB5EXWmDM93jw/exec";
 
 const api = {
   async request(action, data = {}, method = "POST") {
