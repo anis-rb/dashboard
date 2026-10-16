@@ -19,6 +19,7 @@ async function post({ request }: { request: Request }) {
     const { url, token } = config();
     const response = await fetch(url, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "authenticate", ...parsed.data, token }), cache: "no-store", signal: AbortSignal.timeout(15000) });
     const result = await response.json() as Result;
+    console.log("LOGIN DEBUG", { httpStatus: response.status, ok: result.ok, hasSession: !!result.sessionToken, profileStatus: result.profile?.status, profileRole: result.profile?.role, raw: JSON.stringify({ ...result, sessionToken: undefined }) });
     if (!response.ok || !result.ok || !result.sessionToken || result.profile?.status !== "approved") return Response.json({ error: "Incorrect credentials, or account is not active and approved." }, { status: 401, headers: { "Cache-Control": "no-store" } });
     return Response.json({ ok: true }, { headers: { "Cache-Control": "no-store", "Set-Cookie": `rb_session=${encodeURIComponent(result.sessionToken)}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=604800` } });
   } catch { return Response.json({ error: "Sign-in failed. Check the account and private Sheets connection." }, { status: 503, headers: { "Cache-Control": "no-store" } }); }
