@@ -43,7 +43,7 @@ export function Login() {
           <Field label="Password">
             <input className="desk-field" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           </Field>
-          <Button className="mt-1 w-full" disabled={busy}>{busy ? "Checking credentials..." : "Sign in"}</Button>
+          <Button type="submit" className="mt-1 w-full" disabled={busy}>{busy ? "Checking credentials..." : "Sign in"}</Button>
         </form>
       </section>
     </main>
